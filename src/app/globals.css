@@ -1,0 +1,78 @@
+.text-primary {
+    color: #04c8c8 !important;
+}
+
+.userProfileImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+    background-color: #7239ea;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+}
+
+.h-95 {
+    height: 40px;
+}
+
+/* Customizing the default Date Picker Style */
+.react-daterange-picker__wrapper {
+    border: none;
+}
+
+.react-daterange-picker__calendar .react-calendar {
+    border: 0.3px solid var(--bs-primary) !important;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: none;
+    outline: none;
+}
+
+.react-calendar__navigation {
+    border-radius: 5px;
+}
+
+.react-calendar__navigation__arrow .react-calendar__navigation__prev2-button {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.react-calendar__navigation__arrow .react-calendar__navigation__next2-button {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    visibility: hidden !important;
+}
+
+/* For Ripple Button */
+/* Ripple effect */
+.ripple {
+    background-position: center;
+    transition: background 0.8s;
+}
+
+.ripple:hover {
+    background: #48b9e6 radial-gradient(circle, transparent 1%, #48b9e6 1%) center/15000%;
+}
+
+.ripple:active {
+    background-color: #48b9e6;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+/* For Ripple Button */

@@ -1,0 +1,30 @@
+.mostActiveProjectsBodyStyles {
+    /* border: 1px solid red; */
+}
+
+.project_developer {
+    /* border: 1px solid red; */
+}
+
+@media all and (max-width:600px) {
+    .mostActiveProjectsBodyStyles {
+        /* border: 1px solid blue; */
+        height: 420px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        margin-bottom: 20px;
+    }
+
+    .project_developer {
+        white-space: nowrap;
+        /* Prevent text from wrapping to the next line */
+        overflow: hidden;
+        /* Hide any content that overflows the container */
+        text-overflow: ellipsis;
+        /* Add an ellipsis (...) after the text if it overflows */
+        max-width: 170px !important;
+        /* Set a fixed width of 20 pixels */
+        /* border: 5px solid rgb(34, 255, 0); */
+        /* Add a solid border with a green color */
+    }
+}

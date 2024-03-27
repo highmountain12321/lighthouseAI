@@ -1,0 +1,17 @@
+.navbar_search_input {
+    display: block;
+}
+
+.hide_mobile {
+    display: block;
+}
+
+@media all and (max-width:600px) {
+    .navbar_search_input {
+        display: none;
+    }
+
+    .hide_mobile {
+        display: none;
+    }
+}

@@ -1,0 +1,12 @@
+.trendingAreaWidgetBody {
+    /* border: 1px solid red; */
+}
+
+@media all and (max-width:600px) {
+    .trendingAreaWidgetBody {
+        /* border: 1px solid blue; */
+        height: 420px;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+    }
+}

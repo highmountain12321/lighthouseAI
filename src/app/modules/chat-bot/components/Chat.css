@@ -1,0 +1,46 @@
+.chatMessageInputDiv {
+    top: calc(100vh - 320px);
+}
+
+.chatMessageInput {
+    padding: 10px;
+}
+
+@media all and (max-height:500px) {
+    .chatMessageInputDiv {
+        top: calc(100vh - 340px);
+        /*         border: 1px solid red;
+ */
+    }
+
+    .chatMessageInput {
+        padding: 5px;
+        height: 40px;
+    }
+
+    .chatSubmitButton {
+        height: 40px !important;
+        padding-left: 15px !important;
+        width: 40px !important;
+        border-radius: 100% !important;
+    }
+}
+
+@media all and (max-width:500px) {
+    .chatMessageInputDiv {
+        top: calc(100vh - 340px);
+        /*         border: 1px solid red; */
+    }
+
+    .chatMessageInput {
+        padding: 5px;
+        height: 40px;
+    }
+
+    .chatSubmitButton {
+        height: 40px !important;
+        padding-left: 15px !important;
+        width: 40px !important;
+        border-radius: 100% !important;
+    }
+}
