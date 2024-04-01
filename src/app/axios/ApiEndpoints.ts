@@ -13,4 +13,6 @@ export interface ApiEndpoints {
   dashboardSales: string
   dashboardRent: string
   conversation: string
+  claims: string
+  userAttrs: string
 }

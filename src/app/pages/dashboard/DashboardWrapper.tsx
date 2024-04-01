@@ -101,18 +101,6 @@ export const RoleLockWrapper = ({
   )
 }
 
-const logout = () => {
-  const auth = getAuth();
-  signOut(auth).then(() => {
-    // Sign-out successful.
-    console.log("Logout successful");
-    // Here you can also redirect the user to the login page or perform other actions upon successful logout.
-  }).catch((error) => {
-    // An error happened.
-    console.error("Logout error", error);
-  });
-};
-
 const DashboardPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -188,7 +176,6 @@ const DashboardPage = () => {
       {/* begin::Row */}
       <div className='row gy-5 g-xl-8'>
         {/* begin::Col */}
-        <button onClick={logout}>Logout</button>
 
         <div className='col-xxl-6'>
           <MixedWidgetSales

@@ -35,6 +35,7 @@ const AppRoutes: FC = () => {
             try {
                 const accessToken = await user.getIdToken();
                 const apiUrl = apiEndpoints.session
+                console.log(apiUrl)
           
                 // Send access token to backend to exchange for session cookie
                 const response = await axios.post(apiUrl, {}, {
