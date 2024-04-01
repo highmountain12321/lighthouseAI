@@ -19,7 +19,7 @@ const PopUpModal: React.FC<ModalProps> = ({ isOpen, onClose, onAnswer }) => {
         axios.get(apiEndpoints.userAttrs)
             .then(response => {
                 // If the response is not 'none', set shouldDisplayModal to true
-                if(response.data !== 'none') {
+                if(response.data == 'none') {
                     setShouldDisplayModal(true);
                 } else {
                     setShouldDisplayModal(false);
