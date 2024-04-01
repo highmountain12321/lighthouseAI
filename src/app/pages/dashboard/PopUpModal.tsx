@@ -41,7 +41,7 @@ const PopUpModal: React.FC<ModalProps> = ({ isOpen, onClose, onAnswer }) => {
         document.addEventListener('click', closeOnOutsideClick);
 
         return () => document.removeEventListener('click', closeOnOutsideClick);
-    }, [onClose]);
+    }, []);
 
     // Function to handle button clicks
     const handleButtonClick = (user_type: string) => {
