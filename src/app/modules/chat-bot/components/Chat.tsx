@@ -526,9 +526,9 @@ const Chat = () => {
           </>
         )}
         <div
-          className={`w-100 position-absolute mt-1 ${_chatContents.length !== 0 && "chatMessageInputDiv"} chatMessageInputDiv`}
+          className={`w-100 position-absolute ${_chatContents.length !== 0 && "chatMessageInputDiv"} chatMessageInputDiv`}
         >
-          <div className='d-flex align-items-center justify-content-center gap-4 px-8 px-md-12'>
+          <div className='d-flex align-items-center justify-content-center gap-4 px-8 px-md-12 chatMessage'>
             <textarea
               className='form-control form-control-flush ps-10 font-weight-bold chatMessageInput'
               style={{ border: '1px solid #e2e8f0', borderRadius: '45px', color: '#1b254b' }}

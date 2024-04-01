@@ -1,5 +1,5 @@
 .chatMessageInputDiv {
-    top: calc(100vh - 320px);
+    top: calc(100vh - 315px);
 }
 
 .chatMessageInput {
@@ -8,7 +8,7 @@
 
 @media all and (max-height:500px) {
     .chatMessageInputDiv {
-        top: calc(100vh - 340px);
+        top: calc(100vh - 310px) !important;
         /*         border: 1px solid red;
  */
     }
@@ -28,7 +28,7 @@
 
 @media all and (max-width:500px) {
     .chatMessageInputDiv {
-        top: calc(100vh - 340px);
+        top: calc(100vh - 310px);
         /*         border: 1px solid red; */
     }
 
