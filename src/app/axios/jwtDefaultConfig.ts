@@ -25,7 +25,7 @@ const apiEndpoints: ApiEndpoints = {
   dashboardSupplyDemand: `${MAIN_DASHBOARD_API_URL}/dashboard/supply_demand`,
   dashboardSales: `${MAIN_DASHBOARD_API_URL}/dashboard/sales`,
   dashboardRent: `${MAIN_DASHBOARD_API_URL}/dashboard/rent`,
-  conversation: `${MAIN_DASHBOARD_API_URL}/conversations`,
+  conversation: `${LIGHTHOUSEGPT_API_URL}/conversations`,
   claims: `${MAIN_DASHBOARD_API_URL}/auth/claims`,
   userAttrs: `${MAIN_DASHBOARD_API_URL}/auth/userAttrs`,
 }

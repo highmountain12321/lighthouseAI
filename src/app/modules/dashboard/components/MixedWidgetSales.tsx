@@ -80,14 +80,13 @@ const MixedWidgetSales: React.FC<Props> = ({
       return chart
     }
 
-    refreshChart()
-    // const chart = refreshChart()
+    const chart = refreshChart()
 
-    // return () => {
-    //   if (chart) {
-    //     chart.destroy()
-    //   }
-    // }
+    return () => {
+      if (chart) {
+        chart.destroy()
+      }
+    }
   }, [chartHeight, chartMonths, isSaleCard, seriesData])
 
   useEffect(() => {
