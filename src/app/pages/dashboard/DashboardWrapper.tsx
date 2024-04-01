@@ -106,11 +106,10 @@ const DashboardPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    // Simulate checking login status and showing modal
-    const isLoggedIn: boolean = true; // Replace this with actual login check
-    if (isLoggedIn) {
-      setIsModalOpen(true);
-    }
+    // // Simulate checking login status and showing modal
+    // if (isLoggedIn) {
+    //   setIsModalOpen(true);
+    // }
   }, []);
 
   const handleClose = (): void => {
