@@ -31,8 +31,6 @@ const PopUpModal: React.FC<ModalProps> = ({ isOpen, onClose, onAnswer }) => {
             });
 
         const closeOnOutsideClick = (event: MouseEvent) => {  
-          setShouldDisplayModal(true);
-
             const target = event.target as HTMLElement;
             if (target.classList.contains('modal-outside')) {
                 onClose();
