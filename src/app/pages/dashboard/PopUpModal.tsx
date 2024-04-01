@@ -41,11 +41,13 @@ const PopUpModal: React.FC<ModalProps> = ({ isOpen, onClose, onAnswer }) => {
         document.addEventListener('click', closeOnOutsideClick);
 
         return () => document.removeEventListener('click', closeOnOutsideClick);
-    }, []);
+    }, [onClose]);
 
     // Function to handle button clicks
     const handleButtonClick = (user_type: string) => {
-        axios.post(apiEndpoints.claims, { user_type })
+        axios.post(apiEndpoints.claims, null, {
+          params: { user_type }
+        })
             .then(response => {
                 console.log('Post request successful', response);
                 // Call onAnswer or onClose here if needed, for example:
