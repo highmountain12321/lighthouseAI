@@ -87,7 +87,7 @@ const MixedWidgetSales: React.FC<Props> = ({
         chart.destroy()
       }
     }
-  }, [chartHeight, chartMonths, isSaleCard, seriesData])
+  }, [])
 
   useEffect(() => {
     setSeriesData(data?.values || [])
