@@ -39,8 +39,8 @@ const PopUpModal: React.FC<ModalProps> = ({ isOpen, onClose, onAnswer }) => {
                 </div>
                 <div className="modal-body">
                     <div className="row">
-                        <div className="col-4">
-                        <img src= {toAbsoluteUrl('/media/custom/resource1.png')} alt="Modal" className="img-fluid" />
+                        <div className="col-6">
+                        <img src= {toAbsoluteUrl('/media/custom/resource1.png')} width="100%" alt="Modal" className="img-fluid" />
                         </div>
                         <div className="col-6 d-flex flex-column align-items-center justify-content-center">
                         <h1>Let's Help You!</h1>

@@ -248,6 +248,10 @@ export default class JwtService {
     return axios.delete(`${this.jwtConfig.conversation}/${id}`)
   }
 
+  updateFeedbackById(message_id: string, feedbackData: object) {
+    return axios.put(`${this.jwtConfig.conversation}/feedback/${message_id}`, {feedbackData})
+  }
+
   /** Conversation END **/
   /** Conversation END **/
 }

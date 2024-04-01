@@ -6,7 +6,7 @@ import {
   setChatContentChunk,
   setFilteredChatContents,
 } from '../features/chatbot-slice'
-import { addConversationChunk, clearConversationContent, deleteConversationByIdSlice } from '../features/conversation-slice'
+import { addConversationChunk, clearConversationContent, deleteConversationByIdSlice, updateFeedback } from '../features/conversation-slice'
 import { Conversation } from '_metronic/layout/components/aside/Tabs/tabTypes'
 
 const { jwt } = JwtService({})
@@ -198,6 +198,29 @@ export const deleteConversationById = createAsyncThunk(
       if (response.status === 200) {
         dispatch(deleteConversationByIdSlice({ conversationId }))
       }
+
+      return response
+    } catch (error: any) {
+      const { data } = error.response
+      return data
+    }
+  }
+)
+
+interface FeedbackType {
+  message_id: string
+  feedbackData: object
+}
+// updateFeedback
+export const updateFeedbackById = createAsyncThunk(
+  'chat/updateFeedback',
+  async (feedbackData: FeedbackType, { dispatch }) => {
+    try {
+      const response = await jwt.updateFeedbackById(feedbackData.message_id, feedbackData.feedbackData)
+
+      // if (response.status === 200) {
+      //   dispatch(updateFeedback(feedbackData.message_id))
+      // }
 
       return response
     } catch (error: any) {

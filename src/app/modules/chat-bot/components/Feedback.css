@@ -1,0 +1,24 @@
+.feedback-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid #ccc; /* Visual separation */
+  }
+  
+  .feedback-icons button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  input {
+    flex-grow: 1;
+    padding: 5px;
+  }
+  
+  button {
+    padding: 5px 10px;
+  }
+  

@@ -76,7 +76,22 @@ const conversationSlice: any = createSlice({
 
             // Remove conversation by id
             state.conversations = state.conversations.filter(conversation => conversation.id !== conversationId);
-        }
+        },
+        updateFeedback: (state, action: {
+            payload: {
+                conversation: Conversation
+            }
+        }) => {
+            const { conversation } = action.payload;
+
+            // Ensure conversationContents is initialized
+            if (!state.conversations) {
+                throw new Error('conversationContents is not initialized');
+            }
+
+            // Add new chat content
+            state.conversations.push(conversation);
+        }, 
     },
     selectors: {
         getAllConversationContent: (state) => {
@@ -91,5 +106,6 @@ export const clearConversationContent = conversationSlice.actions.clearConversat
 export const setFilteredConversations = conversationSlice.actions.setFilteredConversations;
 export const setSearchDateFilter = conversationSlice.actions.setSearchDateFilter;
 export const deleteConversationByIdSlice = conversationSlice.actions.deleteConversationById;
+export const updateFeedback = conversationSlice.actions.updateFeedback;
 
 export default conversationSlice.reducer

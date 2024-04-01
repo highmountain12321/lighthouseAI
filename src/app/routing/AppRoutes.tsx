@@ -41,10 +41,11 @@ const AppRoutes: FC = () => {
                   headers: {
                       'Content-Type': 'application/json',
                       'Authorization': `Bearer ${accessToken}`,
-                      'credentials': 'include'
-                  }
+                  },
+                  withCredentials: true
                 });
       
+                console.log(response,"response")
                 if (response.status === 200) {
                   const delay = setTimeout(() => {
                     setRedirectDelayComplete(true);

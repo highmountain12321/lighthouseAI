@@ -63,7 +63,7 @@
   }
 
   .custom-modal-size {
-    max-width: 600px; /* Adjust this value based on your preference */
+    max-width: 800px; /* Adjust this value based on your preference */
     width: 100%;
   }
   
@@ -81,10 +81,95 @@
     padding: 10px; /* Optional, adds some spacing around the buttons */
   }
   
-  .button {
-    white-space: nowrap; /* Prevent text wrapping */
-    width: 100%; /* Make buttons take the full width of their parent */
-    text-align: center; /* Center the text */
-    margin-bottom: 10px; /* Space between buttons */
+
+    
+    /* Base styles */
+  .modal-dialog {
+    max-width: 90%;
+    margin: 1.75rem auto;
+  }
+
+  .custom-modal-size {
+    width: auto;
+  }
+
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .buttons-container {
+    width: 100%;
+  }
+
+  /* Larger screens */
+  @media (min-width: 768px) {
+    .custom-modal-size {
+        width: 50%; /* Adjust based on preference */
+    }
+
+    .button {
+      width: 100%; /* Make buttons take the full width of their parent */
+      text-align: center; /* Center the text */
+      margin-bottom: 10px; /* Space between buttons */
+    }
+  }
+
+  /* PopUpModal.css */
+
+/* Assuming you already have some base styles for these elements */
+
+.modal-body .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.modal-body .col-6 {
+  flex: 0 0 50%; /* Default to half width */
+  max-width: 50%; /* Default to half width */
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) { /* Adjust the breakpoint as needed */
+  .modal-body .row {
+    flex-direction: column;
   }
   
+  .modal-body .col-6 {
+    flex: 0 0 100%; /* Full width on small screens */
+    max-width: 100%; /* Full width on small screens */
+    display: flex;
+    justify-content: center; /* Center content for aesthetic purposes */
+    text-align: center; /* Center text for aesthetic purposes */
+  }
+  
+  .img-fluid {
+    max-width: 80%; /* Adjust the image size on small screens */
+    margin-bottom: 20px; /* Add some space between the image and the text */
+  }
+}
+
+/* PopUpModal.css adjustments */
+
+.modal-body .col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  display: flex; /* Ensure the flex container properties are applied */
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+}
+
+@media (max-width: 768px) { /* Target tablets and below */
+  .modal-body .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    /* Keep the image larger on smaller screens without making it full width */
+    /* No change required here if the above rule works well */
+  }
+
+  .img-fluid {
+    width: 100%; /* Make the image responsive within its container */
+    max-width: 100%; /* Ensure it doesn't exceed its container's width */
+    height: auto; /* Maintain aspect ratio */
+  }
+}

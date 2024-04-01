@@ -110,7 +110,7 @@ function EmailVerification() {
         if (user && user.emailVerified === false) {
             // verifyEmail()
         } else {
-            alert(user?.emailVerified)
+            // alert(user?.emailVerified)
             setOtpSuccess('Email Already Verified')
             enqueueSnackbar('Email Already Verified', {
                 variant: 'success',

@@ -23,6 +23,7 @@ import { extractLetters } from 'app/modules/dashboard/components/methods'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth as authFirebase } from "../../../../firebase"
 import "./Chat.css";
+import Feedback from './Feedback';
 
 export interface IButtonModel {
   icon: string
@@ -502,7 +503,10 @@ const Chat = () => {
             ) ? (
               <div ref={chatHistory} style={{ maxHeight: 'calc(100vh - 320px)', overflowY: 'scroll' }}>
                 {_filteredChatContents.map((chat: IChatChunk, index: number) => (
-                  <ChatChunk key={index} {...chat} currentChatId={index} />
+                  <div>
+                    <ChatChunk key={index} {...chat} currentChatId={index} />
+                    <Feedback key={chat.newId} messageId={chat.newId}/>
+                  </div>
                 ))}
               </div>
             ) : (
@@ -516,6 +520,7 @@ const Chat = () => {
                   className='w-150px w-md-200px'
                   alt='not found Logo-1.png'
                 />
+                
               </div>
             )}
           </>
@@ -524,8 +529,7 @@ const Chat = () => {
           className={`w-100 position-absolute mt-1 ${_chatContents.length !== 0 && "chatMessageInputDiv"} chatMessageInputDiv`}
         >
           <div className='d-flex align-items-center justify-content-center gap-4 px-8 px-md-12'>
-            <input
-              type='text'
+            <textarea
               className='form-control form-control-flush ps-10 font-weight-bold chatMessageInput'
               style={{ border: '1px solid #e2e8f0', borderRadius: '45px', color: '#1b254b' }}
               name='chat'
@@ -583,6 +587,7 @@ const Chat = () => {
               )}
             </button>
           </div>
+          
           {/* <div className='d-flex align-items-center justify-content-center mt-12'>
                         <span style={{ color: '#718096', fontSize: '12px' }}>LighthouseGPT may produce inaccurate information about people, places, or facts.</span>
                         <a className='text-decoration-underline fw-500' style={{ color: '#1b254b' }} href='https://help.openai.com/en/articles/6825453-chatgpt-release-notes'>ChatGPT May 12 Version</a>
