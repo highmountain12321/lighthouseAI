@@ -1,75 +1,109 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import FlagIcon from '@mui/icons-material/Flag';
 import SendIcon from '@mui/icons-material/Send';
+import { useSnackbar } from 'notistack'
 import Box from '@mui/material/Box';
-import { updateFeedbackById } from 'app/redux/thunks/conversationThunk';
-import { useAppDispatch } from 'app/redux/hooks';
+import {
+  updateFeedbackById,
+} from 'app/redux/thunks/conversationThunk'
+import { useAppSelector, useAppDispatch } from 'app/redux/hooks'
 
+
+// Define an interface for the component's props
 interface FeedbackProps {
   messageId: string;
 }
 
-type FeedbackData = {
-  feedback?: string;
-  flagged?: boolean;
-  comment?: string;
-};
-
 const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
-  const dispatch = useAppDispatch();
+  const { enqueueSnackbar, } = useSnackbar()
+  const dispatch = useAppDispatch()
+
   const [comment, setComment] = useState('');
-  const [feedbackType, setFeedbackType] = useState('');
-  // Initialize the `isFlagged` state to track the flagged status
-  const [isFlagged, setIsFlagged] = useState(false);
-
-  const submitFeedback = async (feedbackData: FeedbackData) => {
-    await dispatch(updateFeedbackById({ message_id: messageId, feedbackData }));
-    console.log({ message_id: messageId, feedbackData }); // for debugging
-  };
-
-  const handleFeedback = (type: string, value: any) => {
-    let feedbackData = {};
-    if (type === 'flagged') {
-      // Toggle the `isFlagged` state
-      setIsFlagged(!isFlagged);
-      feedbackData = { flagged: !isFlagged };
-    } else if (type === 'feedback') {
-      setFeedbackType(value);
-      feedbackData = { feedback: value };
-    } else if (type === 'comment') {
-      console.log(value, "value");
-      feedbackData = { comment: value };
+  const [feedbackType, setFeedbackType] = useState({
+    flagged: false,
+    positive: false,
+    negative: false,
+  });
+  const submitFeedback = async () => {
+    if (comment === "") {
+      enqueueSnackbar('Please enter a message to send', {
+        variant: 'warning',
+        autoHideDuration: 3000,
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      })
+      return
     }
 
-    submitFeedback(feedbackData);
+    const FeebackData = {
+      flagged: feedbackType.flagged,
+      comment: comment,
+      feedback: feedbackType.positive ? 'good' : feedbackType.negative ? 'bad' : '',
+    };
+
+    // const data = {
+    //   message_id: messageId, // Ensure you have this value from props or context
+    //   feedback: feedbackType.positive ? 'positive' : feedbackType.negative ? 'negative' : '',
+    //   flagged: feedbackType.flagged,
+    //   comment: comment,
+    // };
+
+    const feedbackData = {
+      message_id: messageId,
+      feedbackData: FeebackData
+    }
+
+    await dispatch(updateFeedbackById(feedbackData))
+    // Logic to send feedbackData to the server
+    // console.log(feedbackData);
   };
+
+  useEffect(() => {
+    const FeebackData = {
+      flagged: feedbackType.flagged,
+      comment: comment,
+      feedback: feedbackType.positive ? 'good' : feedbackType.negative ? 'bad' : '',
+    };
+
+    const feedbackData = {
+      message_id: messageId,
+      feedbackData: FeebackData
+    }
+
+    dispatch(updateFeedbackById(feedbackData))
+  }, [feedbackType])
+
 
   return (
     <Box sx={{
       display: 'flex',
-      flexWrap: 'wrap',
+      flexWrap: 'wrap', // Allow items to wrap
       alignItems: 'center',
       gap: 1,
+      border: 0,
+      borderColor: 'divider',
       borderRadius: '4px',
+      margin: '-12px 0 0 0',
       p: 1,
-      maxWidth: '100%',
-      mx: 'auto'
-    }}
-    style={{marginTop: "-1.5rem", marginLeft: "1.5rem"}}>
-      <IconButton onClick={() => handleFeedback('feedback', 'good')} color={feedbackType === 'good' ? 'primary' : 'default'}>
-        <ThumbUpIcon />
-      </IconButton>
-      <IconButton onClick={() => handleFeedback('feedback', 'bad')} color={feedbackType === 'bad' ? 'primary' : 'default'}>
-        <ThumbDownIcon />
-      </IconButton>
-      {/* Use `isFlagged` state to determine the color of the flag icon */}
-      <IconButton onClick={() => handleFeedback('flagged', null)} color={isFlagged ? 'primary' : 'default'}>
-        <FlagIcon />
-      </IconButton>
+      maxWidth: '100%', // Ensure it does not overflow the screen width
+      mx: 'auto' // Centers the box if it's less than the maximum width
+    }}>
+    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, positive: true, negative: false, flagged: false }))} color={feedbackType.positive ? 'primary' : 'default'}>
+      <ThumbUpIcon />
+    </IconButton>
+    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, positive: false, negative: true, flagged: false }))} color={feedbackType.negative ? 'primary' : 'default'}>
+      <ThumbDownIcon />
+    </IconButton>
+    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, flagged: !prev.flagged, positive: false, negative: false }))} color={feedbackType.flagged ? 'primary' : 'default'}>
+      <FlagIcon />
+    </IconButton>
+
       <TextField
         size="small"
         value={comment}
@@ -77,7 +111,7 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
         placeholder="Add a comment..."
         variant="outlined"
       />
-      <IconButton onClick={() => handleFeedback('comment', comment)} color="primary">
+      <IconButton onClick={submitFeedback} color="primary">
         <SendIcon />
       </IconButton>
     </Box>

@@ -188,6 +188,7 @@ const Chat = () => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: 'smooth' })
     }
+    // console.log("useEffect",_filteredChatContents)
   }, [_filteredChatContents])
 
   const HighlightedSentence = ({ sentence, searchText }: { sentence: string; searchText: string }) => {
@@ -206,9 +207,7 @@ const Chat = () => {
     return <span ref={containerRef} />
   }
 
-  const ChatChunk: FC<IChatChunk & { onDisplayComplete: () => void }> = ({ query, response, currentChatId, newId, onDisplayComplete }) => {
-    // Existing implementation remains the same
-
+  const ChatChunk: FC<IChatChunk> = ({ query, response, currentChatId, newId }) => {
     const getLastIndex = _chatContents.length - 1
 
     const [user, loadingAuth, errorAuth] = useAuthState(authFirebase)
@@ -239,7 +238,6 @@ const Chat = () => {
           navigate(`/chat-bot/chat/${newChatId}`);
         }, 2000);
       }
-      // onDisplayComplete(); // Call the callback function when the response is fully displayed
     }
 
     const highlightMatchingWords = (txt: string, searchTxt: string) => {
@@ -255,15 +253,14 @@ const Chat = () => {
     return (
       <div className='d-flex flex-column gap-2 align-items-start justify-content-center mt-3'>
         <div className='d-flex gap-2 align-items-center'>
-          {currentUser?.photoURL ? (
+          {/* {currentUser?.photoURL ? (
             <img src={currentUser.photoURL} className='w-30px' style={{
               borderRadius: "5px"
             }} alt='not found Logo-1.png' />
-          ) : (
+          ) : ( */}
             <div className='d-flex align-items-center justify-content-center bg-info text-white h-30px w-30px border border-black border-1 rounded-circle text-uppercase'>
               {user?.displayName ? extractLetters(user?.displayName as string) : ''}
             </div>
-          )}
           <h4 className='mb-0'>
             {highlightMatchingWords(query, _chatSearchText)}
           </h4>
@@ -393,6 +390,7 @@ const Chat = () => {
       setSubmit(true)
 
       let newRandomId = Math.random().toString(36).substring(7)
+      console.log("======")
 
       if (id) {
         // Reset the chat field
@@ -408,7 +406,7 @@ const Chat = () => {
 
         const new_conversation_chat_response = await dispatch(postConversation({ prompt: chatQuery, randomId: newRandomId }))
 
-        // console.log("new_conversation_chat_response ", new_conversation_chat_response.payload)
+        console.log("new_conversation_chat_response ", new_conversation_chat_response.payload)
 
         let new_chat_id = new_conversation_chat_response.payload.conversation_id
 
@@ -433,21 +431,10 @@ const Chat = () => {
     download(csvConfig)(csv)
   }
 
-  const [displayedResponses, setDisplayedResponses] = useState<Record<string, boolean>>({});
-
-  const handleResponseDisplayComplete = (messageId: string) => {
-      setDisplayedResponses(prev => ({ ...prev, [messageId]: true }));
-  };
-
-
   return (
     <div className='d-flex flex-column'>
       <div>
         <div className='w-full d-flex align-items-center justify-content-center gap-2 mb-1 '>
-          {/* <ModelButton icon='/media/logos/export-icon.png' text='Export Chat'
-                        onClick={exportChat}
-                    /> */}
-
           <ModelButton icon='/media/logos/researcher-icon.png' text='Researcher' />
 
           <RoleLockWrapper locked={!isPremium}>
@@ -481,11 +468,7 @@ const Chat = () => {
             ) ? (
               <div ref={chatHistory} style={{ maxHeight: 'calc(100vh - 320px)', overflowY: 'scroll' }}>
                 {_filteredChatContents.map((chat: IChatChunk, index: number) => (
-                  <ChatChunk 
-                  {...chat} 
-                  currentChatId={index} 
-                  onDisplayComplete={() => handleResponseDisplayComplete(chat.newId)} 
-                  />
+                  <ChatChunk key={index} {...chat} currentChatId={index} />
                 ))}
               </div>
             ) : (
@@ -516,18 +499,23 @@ const Chat = () => {
               _conversationContents.length !== 0
             ) ? (
               <div ref={chatHistory} style={{ maxHeight: 'calc(100vh - 320px)', overflowY: 'scroll' }}>
-              {
-                  _filteredChatContents.map((chat: IChatChunk, index: number) => (
-                      <div key={index}>
-                          <ChatChunk 
-                              {...chat} 
-                              currentChatId={index} 
-                              onDisplayComplete={() => handleResponseDisplayComplete(chat.newId)} 
-                          />
-                          {displayedResponses[chat.newId] && <Feedback messageId={chat.newId}/>}
-                      </div>
-                  ))
-              }
+                {_filteredChatContents.map((chat: IChatChunk, index: number) => (
+                  <div>
+                    <ChatChunk key={index} {...chat} currentChatId={index} />
+                    {
+                      (chat.response !== "I'm thinking...")
+                      ?
+                      (
+                      <Feedback key={chat.newId} messageId={chat.newId}/>
+                      )
+                      :
+                      (
+                        <></>
+                      )
+                    }
+                    
+                  </div>
+                ))}
               </div>
             ) : (
               <div
