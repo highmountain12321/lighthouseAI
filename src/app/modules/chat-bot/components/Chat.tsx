@@ -206,7 +206,9 @@ const Chat = () => {
     return <span ref={containerRef} />
   }
 
-  const ChatChunk: FC<IChatChunk> = ({ query, response, currentChatId, newId }) => {
+  const ChatChunk: FC<IChatChunk & { onDisplayComplete: () => void }> = ({ query, response, currentChatId, newId, onDisplayComplete }) => {
+    // Existing implementation remains the same
+
     const getLastIndex = _chatContents.length - 1
 
     const [user, loadingAuth, errorAuth] = useAuthState(authFirebase)
@@ -237,6 +239,7 @@ const Chat = () => {
           navigate(`/chat-bot/chat/${newChatId}`);
         }, 2000);
       }
+      // onDisplayComplete(); // Call the callback function when the response is fully displayed
     }
 
     const highlightMatchingWords = (txt: string, searchTxt: string) => {
@@ -430,6 +433,13 @@ const Chat = () => {
     download(csvConfig)(csv)
   }
 
+  const [displayedResponses, setDisplayedResponses] = useState<Record<string, boolean>>({});
+
+  const handleResponseDisplayComplete = (messageId: string) => {
+      setDisplayedResponses(prev => ({ ...prev, [messageId]: true }));
+  };
+
+
   return (
     <div className='d-flex flex-column'>
       <div>
@@ -471,7 +481,11 @@ const Chat = () => {
             ) ? (
               <div ref={chatHistory} style={{ maxHeight: 'calc(100vh - 320px)', overflowY: 'scroll' }}>
                 {_filteredChatContents.map((chat: IChatChunk, index: number) => (
-                  <ChatChunk key={index} {...chat} currentChatId={index} />
+                  <ChatChunk 
+                  {...chat} 
+                  currentChatId={index} 
+                  onDisplayComplete={() => handleResponseDisplayComplete(chat.newId)} 
+                  />
                 ))}
               </div>
             ) : (
@@ -502,13 +516,18 @@ const Chat = () => {
               _conversationContents.length !== 0
             ) ? (
               <div ref={chatHistory} style={{ maxHeight: 'calc(100vh - 320px)', overflowY: 'scroll' }}>
-                {_filteredChatContents.map((chat: IChatChunk, index: number) => (
-                  // console.log(chat, "-----------------")
-                  <div>
-                    <ChatChunk key={index} {...chat} currentChatId={index} />
-                    <Feedback key={chat.newId} messageId={chat.newId}/>
-                  </div>
-                ))}
+              {
+                  _filteredChatContents.map((chat: IChatChunk, index: number) => (
+                      <div key={index}>
+                          <ChatChunk 
+                              {...chat} 
+                              currentChatId={index} 
+                              onDisplayComplete={() => handleResponseDisplayComplete(chat.newId)} 
+                          />
+                          {displayedResponses[chat.newId] && <Feedback messageId={chat.newId}/>}
+                      </div>
+                  ))
+              }
               </div>
             ) : (
               <div

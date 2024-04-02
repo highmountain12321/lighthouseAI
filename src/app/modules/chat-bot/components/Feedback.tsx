@@ -23,33 +23,29 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
   const dispatch = useAppDispatch();
   const [comment, setComment] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
+  // Initialize the `isFlagged` state to track the flagged status
+  const [isFlagged, setIsFlagged] = useState(false);
 
   const submitFeedback = async (feedbackData: FeedbackData) => {
-    await dispatch(updateFeedbackById({ message_id: messageId, feedbackData }))
+    await dispatch(updateFeedbackById({ message_id: messageId, feedbackData }));
     console.log({ message_id: messageId, feedbackData }); // for debugging
-    // Reset state if needed
   };
 
   const handleFeedback = (type: string, value: any) => {
     let feedbackData = {};
-    switch (type) {
-      case 'feedback':
-        setFeedbackType(value);
-        feedbackData = { feedback: value };
-        break;
-      case 'flagged':
-        feedbackData = { flagged: value };
-        break;
-      case 'comment':
-        console.log(value, "value")
-        feedbackData = { comment: value };
-        break;
-      default:
-        break;
+    if (type === 'flagged') {
+      // Toggle the `isFlagged` state
+      setIsFlagged(!isFlagged);
+      feedbackData = { flagged: !isFlagged };
+    } else if (type === 'feedback') {
+      setFeedbackType(value);
+      feedbackData = { feedback: value };
+    } else if (type === 'comment') {
+      console.log(value, "value");
+      feedbackData = { comment: value };
     }
-    // if (type !== 'comment') { // For comment, we wait for the submit button click
-      submitFeedback(feedbackData);
-    // }
+
+    submitFeedback(feedbackData);
   };
 
   return (
@@ -58,8 +54,6 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
       flexWrap: 'wrap',
       alignItems: 'center',
       gap: 1,
-      // border: 1,
-      borderColor: 'divider',
       borderRadius: '4px',
       p: 1,
       maxWidth: '100%',
@@ -72,7 +66,8 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
       <IconButton onClick={() => handleFeedback('feedback', 'bad')} color={feedbackType === 'bad' ? 'primary' : 'default'}>
         <ThumbDownIcon />
       </IconButton>
-      <IconButton onClick={() => handleFeedback('flagged', feedbackType !== 'flagged')} color={feedbackType === 'flagged' ? 'primary' : 'default'}>
+      {/* Use `isFlagged` state to determine the color of the flag icon */}
+      <IconButton onClick={() => handleFeedback('flagged', null)} color={isFlagged ? 'primary' : 'default'}>
         <FlagIcon />
       </IconButton>
       <TextField
