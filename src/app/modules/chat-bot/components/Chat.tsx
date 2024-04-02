@@ -503,6 +503,7 @@ const Chat = () => {
             ) ? (
               <div ref={chatHistory} style={{ maxHeight: 'calc(100vh - 320px)', overflowY: 'scroll' }}>
                 {_filteredChatContents.map((chat: IChatChunk, index: number) => (
+                  // console.log(chat, "-----------------")
                   <div>
                     <ChatChunk key={index} {...chat} currentChatId={index} />
                     <Feedback key={chat.newId} messageId={chat.newId}/>
