@@ -113,7 +113,7 @@ export const postConversation = createAsyncThunk(
 
       const response = await jwt.postConversation(conversation.prompt)
       const replyObj = response.data
-
+      console.log(response, "response")
       dispatch(
         setChatContentChunk({
           extra: {

@@ -160,11 +160,11 @@ const Chat = () => {
   useEffect(() => {
     if (id) {
       fetchSingleConversationData(id)
-      // console.log('id found')
+      console.log(id, 'id found')
 
       // console.log('All Chats: ', _chatContents)
     } else {
-      // console.log('No id found')
+      console.log('No id found')
     }
   }, [id, pathname])
 
