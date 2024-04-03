@@ -85,12 +85,12 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
       display: 'flex',
       flexWrap: 'wrap', // Allow items to wrap
       alignItems: 'center',
-      gap: 1,
+      gap: 0,
       border: 0,
       borderColor: 'divider',
       borderRadius: '4px',
       margin: '-12px 0 0 0',
-      p: 1,
+      p: 0,
       maxWidth: '100%', // Ensure it does not overflow the screen width
       mx: 'auto' // Centers the box if it's less than the maximum width
     }}>

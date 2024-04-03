@@ -500,13 +500,13 @@ const Chat = () => {
             ) ? (
               <div className="chat-history" ref={chatHistory} style={{ maxHeight: 'calc(100vh - 320px)', overflowY: 'scroll' }}>
                 {_filteredChatContents.map((chat: IChatChunk, index: number) => (
-                  <div className='message-container mt-5'>
+                  <div className='message-container mt-5 px-2 py-4'>
                     <ChatChunk key={index} {...chat} currentChatId={index} />
                     {
                       (chat.response !== "I'm thinking...")
                       ?
                       (
-                        <div className='feedback-bar'>
+                        <div className={'' + (index !== _filteredChatContents.length - 1 && 'additional-class')}>
                           <Feedback key={chat.newId} messageId={chat.newId}/>
                         </div>
                       )
