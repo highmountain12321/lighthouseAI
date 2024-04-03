@@ -160,7 +160,12 @@ const Chat = () => {
   useEffect(() => {
     if (id) {
       console.log(id, "---conversation id check!")
-      fetchSingleConversationData(id)
+      if(id == undefined) {
+        let id1: any = localStorage.getItem('newConversationId');
+        fetchSingleConversationData(id1)
+      } else {
+        fetchSingleConversationData(id)
+      }
       // console.log('id found')
 
       // console.log('All Chats: ', _chatContents)

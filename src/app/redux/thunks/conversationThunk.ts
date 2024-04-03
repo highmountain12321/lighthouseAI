@@ -20,7 +20,7 @@ export const getAllConversationsThunk = createAsyncThunk(
       const response = await jwt.getAllConversations()
 
       // console.log("Resonse of conversatoins ===> ")
-      console.log(response.data[0], "new conversation")
+      // console.log(response.data[0], "new conversation")
       localStorage.setItem('newConversationId', response.data[0].id)
       const conversations = response.data
 
