@@ -13,6 +13,12 @@
     right: 0; /* Adjust as needed */
 }
 
+.false {
+    position: absolute; /* Position the feedback bar */
+    bottom: -35px; /* Adjust as needed */
+    right: 0; /* Adjust as needed */
+}
+
 .message-container:hover .feedback-bar {
     display: flex; /* Show the feedback bar on hover */
     /* Additional styling for the feedback bar */
