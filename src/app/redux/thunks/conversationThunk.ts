@@ -167,7 +167,7 @@ export const continueConversation = createAsyncThunk(
       console.log("Response Status Code: ", response.status)
       console.log(response, "-----------response")
 
-      localStorage.setItem('randomId', conversation.randomId)
+      localStorage.setItem('randomId', response.data.id)
 
       const replyObj = response.data
 

@@ -506,7 +506,7 @@ const Chat = () => {
                       (chat.response !== "I'm thinking...")
                       ?
                       (
-                        <div className={'' + (index !== _filteredChatContents.length - 1 && 'additional-class')}>
+                        <div className={'' + (index !== _filteredChatContents.length - 1 && 'feedback-bar')}>
                           <Feedback key={chat.newId} messageId={chat.newId}/>
                         </div>
                       )
