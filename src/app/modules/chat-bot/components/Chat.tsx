@@ -460,7 +460,7 @@ const Chat = () => {
       </div>
       <div className='position-relative'>
         {(_filteredChatContents.length === 1 && (id === undefined || id === null || id === '')) ? (
-          <div className='message-container'>
+          <>
             {(
               _filteredChatContents.length !== 0
               &&
@@ -484,9 +484,9 @@ const Chat = () => {
                 />
               </div>
             )}
-          </div>
+          </>
         ) : (
-          <>
+          <div className='message-container'>
             {(
               _filteredChatContents.length !== 0
               &&
@@ -533,7 +533,7 @@ const Chat = () => {
                 
               </div>
             )}
-          </>
+          </div>
         )}
         <div
           className={`w-100 position-absolute ${_chatContents.length !== 0 && "chatMessageInputDiv"} chatMessageInputDiv`}
