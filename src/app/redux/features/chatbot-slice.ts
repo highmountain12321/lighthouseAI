@@ -59,6 +59,9 @@ const chatbotSlice = createSlice({
       state.chatContents = prev.map((content, index) =>
         content.newId === chatId ? { ...content, response: chunkText } : content
       )
+      prev.map((content, index) =>
+      console.log(content.newId, "---------------------", chatId, "============================", content, "+++++++++++++++++++++")
+      )
 
       // Update the filtered chat contents
       state.filteredChatContents = state.chatContents
