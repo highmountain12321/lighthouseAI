@@ -160,11 +160,11 @@ const Chat = () => {
   useEffect(() => {
     if (id) {
       fetchSingleConversationData(id)
-      console.log(id, 'id found')
+      // console.log('id found')
 
       // console.log('All Chats: ', _chatContents)
     } else {
-      console.log('No id found')
+      // console.log('No id found')
     }
   }, [id, pathname])
 
@@ -458,7 +458,7 @@ const Chat = () => {
                     </div>
                 </div> */}
       </div>
-      <div className='position-relative'>
+      <div className='position-relative message-container'>
         {(_filteredChatContents.length === 1 && (id === undefined || id === null || id === '')) ? (
           <>
             {(
@@ -506,7 +506,9 @@ const Chat = () => {
                       (chat.response !== "I'm thinking...")
                       ?
                       (
-                      <Feedback key={chat.newId} messageId={chat.newId}/>
+                        <div className='feedback-bar'>
+                          <Feedback key={chat.newId} messageId={chat.newId}/>
+                        </div>
                       )
                       :
                       (
