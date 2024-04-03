@@ -162,6 +162,7 @@ const Chat = () => {
       console.log(id, "---conversation id check!")
       if(id == undefined) {
         let id1: any = localStorage.getItem('newConversationId');
+        console.log(id1, "++++++++++")
         fetchSingleConversationData(id1)
       } else {
         fetchSingleConversationData(id)
