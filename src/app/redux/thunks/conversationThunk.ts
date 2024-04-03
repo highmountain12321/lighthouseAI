@@ -113,7 +113,6 @@ export const postConversation = createAsyncThunk(
 
       const response = await jwt.postConversation(conversation.prompt)
       const replyObj = response.data
-      console.log(response, "response")
       dispatch(
         setChatContentChunk({
           extra: {
@@ -166,6 +165,7 @@ export const continueConversation = createAsyncThunk(
       const response: any = await jwt.continueConversation(conversation.id, conversation.prompt)
 
       console.log("Response Status Code: ", response.status)
+      console.log(response, "-----------response")
 
       localStorage.setItem('randomId', conversation.randomId)
 
