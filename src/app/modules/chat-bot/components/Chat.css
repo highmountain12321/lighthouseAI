@@ -63,3 +63,7 @@
         border-radius: 100% !important;
     }
 }
+.chat-history {
+    padding-bottom: 60px; /* Adjust based on the actual height of your feedback component */
+    overflow-y: auto;
+  }
