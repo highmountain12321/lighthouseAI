@@ -486,7 +486,7 @@ const Chat = () => {
             )}
           </>
         ) : (
-          <div className='message-container'>
+          <div>
             {(
               _filteredChatContents.length !== 0
               &&
@@ -500,7 +500,7 @@ const Chat = () => {
             ) ? (
               <div ref={chatHistory} style={{ maxHeight: 'calc(100vh - 320px)', overflowY: 'scroll' }}>
                 {_filteredChatContents.map((chat: IChatChunk, index: number) => (
-                  <div>
+                  <div className='message-container'>
                     <ChatChunk key={index} {...chat} currentChatId={index} />
                     {
                       (chat.response !== "I'm thinking...")
