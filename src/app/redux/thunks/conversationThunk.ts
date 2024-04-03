@@ -175,7 +175,8 @@ export const continueConversation = createAsyncThunk(
         setChatContentChunk({
           extra: {
             message: conversation.prompt,
-            id: conversation.randomId,
+            // id: conversation.randomId,
+            id: response.data.id,
           },
           chunkText: (response.status === 200) ? replyObj.response : "Ooops! Failed to get response from server",
         })
