@@ -9,14 +9,14 @@
 .feedback-bar {
     display: none; /* Initially hide the feedback bar */
     position: absolute; /* Position the feedback bar */
-    top: -30px; /* Adjust as needed */
+    bottom: -35px; /* Adjust as needed */
     right: 0; /* Adjust as needed */
 }
 
 .message-container:hover .feedback-bar {
     display: flex; /* Show the feedback bar on hover */
     /* Additional styling for the feedback bar */
-    background-color: lightgray;
+    /* background-color: lightgray; */
     padding: 5px;
     border-radius: 4px;
 }

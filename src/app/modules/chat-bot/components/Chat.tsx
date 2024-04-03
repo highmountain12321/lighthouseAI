@@ -458,7 +458,7 @@ const Chat = () => {
                     </div>
                 </div> */}
       </div>
-      <div className='position-relative message-container'>
+      <div className='position-relative'>
         {(_filteredChatContents.length === 1 && (id === undefined || id === null || id === '')) ? (
           <>
             {(
@@ -473,7 +473,7 @@ const Chat = () => {
               </div>
             ) : (
               <div
-                className='d-flex justify-content-center align-items-center'
+                className='message-container d-flex justify-content-center align-items-center'
                 style={{ height: 'calc(100vh - 320px)' }}
               >
                 {/* Content Area */}
