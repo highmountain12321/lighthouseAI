@@ -117,7 +117,7 @@ export const postConversation = createAsyncThunk(
         setChatContentChunk({
           extra: {
             message: conversation.prompt,
-            id: conversation.randomId,
+            id: response.data.id,
           },
           chunkText: (response.status === 200) ? replyObj.response : "Ooops! Failed to get response from server",
         })
@@ -129,7 +129,7 @@ export const postConversation = createAsyncThunk(
           response: replyObj.response,
           queryDate: new Date().toISOString(),
           responseDate: new Date().toISOString(),
-          newId: conversation.randomId
+          newId: response.data.id
         }
       ]
 
