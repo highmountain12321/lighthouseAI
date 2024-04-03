@@ -167,6 +167,7 @@ export const continueConversation = createAsyncThunk(
       console.log("Response Status Code: ", response.status)
       console.log(response, "-----------response")
 
+      // localStorage.setItem('randomId', conversation.randomId)
       localStorage.setItem('randomId', response.data.id)
 
       const replyObj = response.data
@@ -181,6 +182,29 @@ export const continueConversation = createAsyncThunk(
           chunkText: (response.status === 200) ? replyObj.response : "Ooops! Failed to get response from server",
         })
       )
+
+      const response1 = await jwt.getConversationById(conversation.id)
+
+      const conversation_chats = response1.data
+
+      dispatch(clearChatContent())
+
+      for (let i = 0; i < conversation_chats.length; i++) {
+        const chat = conversation_chats[i]
+
+        dispatch(
+          addChatContentChunk({
+            extra: {
+              message: chat.prompt,
+              id: chat.id,
+              createdAt: chat.createdAt,
+            },
+            chunkText: chat.reply,
+          })
+        )
+      }
+
+      dispatch(setFilteredChatContents(conversation_chats))
 
       // console.log('Continue Conversation Response ', response)
     } catch (error: any) {
