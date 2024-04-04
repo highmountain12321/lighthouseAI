@@ -76,7 +76,7 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
       feedbackData: FeebackData
     }
 
-    // dispatch(updateFeedbackById(feedbackData))
+    dispatch(updateFeedbackById(feedbackData))
   }, [feedbackType])
 
 
