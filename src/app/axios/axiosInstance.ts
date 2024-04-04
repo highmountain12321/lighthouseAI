@@ -249,7 +249,9 @@ export default class JwtService {
   }
 
   updateFeedbackById(message_id: string, feedbackData: object) {
-    return axios.put(`${this.jwtConfig.conversation}/feedback/${message_id}`, {feedbackData})
+    if(message_id != 'undefined') {
+      return axios.put(`${this.jwtConfig.conversation}/feedback/${message_id}`, {feedbackData})
+    }
   }
 
   /** Conversation END **/
