@@ -402,8 +402,12 @@ const Chat = () => {
       if (id) {
         // Reset the chat field
         setChatQuery('')
-
-        await dispatch(continueConversation({ prompt: chatQuery, id: id, randomId: newRandomId }))
+        if(id == 'undefined') {
+          let id1: any = localStorage.getItem('newConversationId');
+          await dispatch(continueConversation({ prompt: chatQuery, id: id1, randomId: newRandomId }))
+        } else {
+          await dispatch(continueConversation({ prompt: chatQuery, id: id, randomId: newRandomId }))
+        }
         setApplyAnimation({
           id: newRandomId,
           apply: true,
