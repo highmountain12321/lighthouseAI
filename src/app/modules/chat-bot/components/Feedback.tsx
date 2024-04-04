@@ -25,8 +25,8 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
   const [comment, setComment] = useState('');
   const [feedbackType, setFeedbackType] = useState({
     flagged: false,
-    positive: false,
-    negative: false,
+    positive: "",
+    negative: "",
   });
   const submitFeedback = async () => {
     if (comment === "") {
@@ -44,7 +44,7 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
     const FeebackData = {
       flagged: feedbackType.flagged,
       comment: comment,
-      feedback: feedbackType.positive ? 'good' : feedbackType.negative ? 'bad' : '',
+      feedback: feedbackType.positive == "" ? feedbackType.negative == "" ? "" : feedbackType.negative : feedbackType.positive,
     };
 
     // const data = {
@@ -94,13 +94,13 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
       maxWidth: '100%', // Ensure it does not overflow the screen width
       mx: 'auto' // Centers the box if it's less than the maximum width
     }}>
-    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, positive: true, negative: false, flagged: false }))} color={feedbackType.positive ? 'primary' : 'default'}>
+    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, positive: "good" }))} color={feedbackType.positive ? 'primary' : 'default'}>
       <ThumbUpIcon />
     </IconButton>
-    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, positive: false, negative: true, flagged: false }))} color={feedbackType.negative ? 'primary' : 'default'}>
+    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, positive: "bad" }))} color={feedbackType.negative ? 'primary' : 'default'}>
       <ThumbDownIcon />
     </IconButton>
-    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, flagged: !prev.flagged, positive: false, negative: false }))} color={feedbackType.flagged ? 'primary' : 'default'}>
+    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, flagged: !prev.flagged }))} color={feedbackType.flagged ? 'primary' : 'default'}>
       <FlagIcon />
     </IconButton>
 
