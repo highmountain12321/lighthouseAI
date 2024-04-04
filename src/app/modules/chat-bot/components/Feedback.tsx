@@ -76,7 +76,8 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
       feedbackData: FeebackData
     }
     console.log(messageId, "------------undefined or not")
-    if(messageId != 'undefined') {
+    console.log(typeof(messageId), "---------typeof")
+    if(typeof(messageId) != undefined) {
       console.log("it's undefined!")
       dispatch(updateFeedbackById(feedbackData))
     }
