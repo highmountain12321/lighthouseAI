@@ -97,7 +97,7 @@ const Feedback: React.FC<FeedbackProps> = ({ messageId }) => {
     <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, positive: "good" }))} color={feedbackType.positive ? 'primary' : 'default'}>
       <ThumbUpIcon />
     </IconButton>
-    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, positive: "bad" }))} color={feedbackType.negative ? 'primary' : 'default'}>
+    <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, negative: "bad" }))} color={feedbackType.negative ? 'primary' : 'default'}>
       <ThumbDownIcon />
     </IconButton>
     <IconButton onClick={() => setFeedbackType(prev => ({ ...prev, flagged: !prev.flagged }))} color={feedbackType.flagged ? 'primary' : 'default'}>
