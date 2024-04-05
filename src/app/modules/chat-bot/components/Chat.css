@@ -71,5 +71,7 @@
 }
 .chat-history {
     padding-bottom: 60px; /* Adjust based on the actual height of your feedback component */
-    overflow-y: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; /* Enable momentum scrolling for iOS */
+    overscroll-behavior: contain; /* Disable scroll bouncing */
   }

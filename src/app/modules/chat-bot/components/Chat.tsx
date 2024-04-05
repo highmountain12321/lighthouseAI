@@ -497,7 +497,7 @@ const Chat = () => {
             )}
           </>
         ) : (
-          <div>
+          <div style={{display: "flex", alignItems: "center", justifyContent: "cent"}}>
             {(
               _filteredChatContents.length !== 0
               &&

@@ -3,7 +3,7 @@ import { ApiEndpoints } from './ApiEndpoints'
 // #PRODUCTION
 const MAIN_SERVICE_URL = 'https://dev.lighthouseuae.com/api/v1' // production url
 const MAIN_DASHBOARD_API_URL = 'https://dev.lighthouseuae.com/api' // production url
-const LIGHTHOUSEGPT_API_URL = 'https://dev.lighthouseuae.com/api/lighthousegpt' // production url 
+const LIGHTHOUSEGPT_API_URL = 'https://dev.lighthouseuae.com/api/lighthousegpt' // production url
 
 // #DEVELOPMENT
 // const MAIN_SERVICE_URL = 'http://127.0.0.1:5000/api/v1' // development url

@@ -35,7 +35,6 @@ const AppRoutes: FC = () => {
             try {
                 const accessToken = await user.getIdToken();
                 const apiUrl = apiEndpoints.session
-                console.log(apiUrl)
           
                 // Send access token to backend to exchange for session cookie
                 const response = await axios.post(apiUrl, {}, {
@@ -46,7 +45,6 @@ const AppRoutes: FC = () => {
                   withCredentials: true
                 });
       
-                console.log(response,"response")
                 if (response.status === 200) {
                   const delay = setTimeout(() => {
                     setRedirectDelayComplete(true);
